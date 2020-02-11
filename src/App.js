@@ -24,9 +24,9 @@ class App extends Component {
         <Header />
         <div className='content-section'>
           <nav>
-            <Route exact path="/" render={() => <MainSidebar folders={this.state.folders}/>} />
-            <Route path="/folder/:folderId" render={() => <MainSidebar folders={this.state.folders}/>} />
-            <Route path="/note/:noteId" render={(props) => {
+            <Route exact path={process.env.PUBLIC_URL + '/'} render={() => <MainSidebar folders={this.state.folders}/>} />
+            <Route path={process.env.PUBLIC_URL + '/folder/:folderId'} render={() => <MainSidebar folders={this.state.folders}/>} />
+            <Route path={process.env.PUBLIC_URL + '/note/:noteId'} render={(props) => {
               return <NoteSidebar
                 folder={this.state.folders.find(folder => folder.id === (this.state.notes.find(note => note.id === props.match.params.noteId)).folderId)}                 
               />
@@ -34,9 +34,9 @@ class App extends Component {
               }/>
           </nav>
           <main>
-            <Route exact path="/" render={() => <Main notes={this.state.notes} />} />
-            <Route path="/folder/:folderId" render={(props) => <Main notes={this.state.notes.filter(note => note.folderId === props.match.params.folderId)} />} />
-            <Route path="/note/:noteId" render={(props) => <NoteMain note={this.state.notes.find(note => note.id === props.match.params.noteId)}/>} />
+            <Route exact path={process.env.PUBLIC_URL + '/'} render={() => <Main notes={this.state.notes} />} />
+            <Route path={process.env.PUBLIC_URL + '/folder/:folderId'} render={(props) => <Main notes={this.state.notes.filter(note => note.folderId === props.match.params.folderId)} />} />
+            <Route path={process.env.PUBLIC_URL + '/note/:noteId'} render={(props) => <NoteMain note={this.state.notes.find(note => note.id === props.match.params.noteId)}/>} />
           </main>
         </div>
       </div>
