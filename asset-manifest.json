@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/noteful/static/css/main.783aa64e.chunk.css",
+    "main.js": "/noteful/static/js/main.f9c2de92.chunk.js",
+    "main.js.map": "/noteful/static/js/main.f9c2de92.chunk.js.map",
+    "runtime-main.js": "/noteful/static/js/runtime-main.169eea1e.js",
+    "runtime-main.js.map": "/noteful/static/js/runtime-main.169eea1e.js.map",
+    "static/js/2.30481947.chunk.js": "/noteful/static/js/2.30481947.chunk.js",
+    "static/js/2.30481947.chunk.js.map": "/noteful/static/js/2.30481947.chunk.js.map",
+    "index.html": "/noteful/index.html",
+    "precache-manifest.44804bc2738c5911a96ca8e891f55362.js": "/noteful/precache-manifest.44804bc2738c5911a96ca8e891f55362.js",
+    "service-worker.js": "/noteful/service-worker.js",
+    "static/css/main.783aa64e.chunk.css.map": "/noteful/static/css/main.783aa64e.chunk.css.map",
+    "static/js/2.30481947.chunk.js.LICENSE.txt": "/noteful/static/js/2.30481947.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.169eea1e.js",
+    "static/js/2.30481947.chunk.js",
+    "static/css/main.783aa64e.chunk.css",
+    "static/js/main.f9c2de92.chunk.js"
+  ]
+}
