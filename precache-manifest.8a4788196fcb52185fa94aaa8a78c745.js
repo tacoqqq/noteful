@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "e1a7e63191a9bd7d30d699a31c5e367b",
+    "revision": "bfd82f7f8ad13b4b60d0104220912f83",
     "url": "/noteful/index.html"
   },
   {
-    "revision": "ddb045bb343fa87a9940",
+    "revision": "638319e93e13c7623b31",
     "url": "/noteful/static/css/main.783aa64e.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/noteful/static/js/2.30481947.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "ddb045bb343fa87a9940",
-    "url": "/noteful/static/js/main.f9c2de92.chunk.js"
+    "revision": "638319e93e13c7623b31",
+    "url": "/noteful/static/js/main.b2ed6daf.chunk.js"
   },
   {
     "revision": "4d1232d6749ce3abbc09",
