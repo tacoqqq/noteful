@@ -1,0 +1,12 @@
+.note-list {
+    margin: 0 auto;
+    font-size: 18px;
+    padding: 20px;
+    width: 70%;
+}
+
+.add-button {
+    width: 40%;
+    font-size: 18px;
+    margin-left: 10px;
+}
