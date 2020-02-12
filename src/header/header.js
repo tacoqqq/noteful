@@ -6,7 +6,7 @@ function Header(){
     return(
         <header className='header'>
             <h1 className='header-title'>
-                <Link to="/">
+                <Link to={process.env.PUBLIC_URL + "/"}>
                     Noteful
                 </Link>
             </h1>
