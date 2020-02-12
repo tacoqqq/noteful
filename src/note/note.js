@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 class Note extends Component{
     render(){
         return (
-            <Link to={`/note/${this.props.id}`}>
+            <Link to={process.env.PUBLIC_URL + `/note/${this.props.id}`}>
                 <div className="note">
                     <h2>{this.props.title}</h2>
                     <div className="note-second-row">
