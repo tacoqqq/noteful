@@ -82,37 +82,39 @@ export default class AddNote extends Component {
     handleSubmitNote(e){
         e.preventDefault();
         this.validateTitle();
-        const noteId = uuid.v4();
-        const localTime = new Date();
-        const formattedTime = localTime.toISOString();
-        const folderId = (this.context.folders.find(folder => folder.name === this.state.note.folder)).id
-        const data = {
-            id: noteId,
-            name: this.state.note.title,
-            modified: formattedTime,
-            folderId: folderId,
-            content: this.state.note.content
-        }
-        console.log(data)
-
-        fetch(`${config.API_ENDPOINT}/notes`, {
-            method: 'POST',
-            body: JSON.stringify(data),
-            headers: {
-                'content-type': 'application/json'
+        if (this.state.note.title.length !== 0){
+            const noteId = uuid.v4();
+            const localTime = new Date();
+            const formattedTime = localTime.toISOString();
+            const folderId = (this.context.folders.find(folder => folder.name === this.state.note.folder)).id
+            const data = {
+                id: noteId,
+                name: this.state.note.title,
+                modified: formattedTime,
+                folderId: folderId,
+                content: this.state.note.content
             }
-        })
-            .then(response => {
-                if(!response.ok) {
-                    throw new Error( `Something went wrong. please try again later.`)
+            console.log(data)
+
+            fetch(`${config.API_ENDPOINT}/notes`, {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'content-type': 'application/json'
                 }
-                return response.json()
             })
-            .then(data => {
-                this.context.addNote(data);
-                this.props.history.push('/')
-            } )
-            .catch(err => console.error(err))
+                .then(response => {
+                    if(!response.ok) {
+                        throw new Error( `Something went wrong. please try again later.`)
+                    }
+                    return response.json()
+                })
+                .then(data => {
+                    this.context.addNote(data);
+                    this.props.history.push('/')
+                } )
+                .catch(err => console.error(err))
+        }
     }
 
     handleCancel = () => {
