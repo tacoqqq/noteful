@@ -6,7 +6,7 @@ import {BrowserRouter} from 'react-router-dom';
 
 
 ReactDOM.render(
-    <BrowserRouter basename="noteful">
+    <BrowserRouter basename="/noteful">
         <App />
     </BrowserRouter>, 
     document.getElementById('root')
