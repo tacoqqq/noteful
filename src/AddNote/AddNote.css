@@ -1,0 +1,27 @@
+.add-note-container {
+    padding: 10px;
+}
+
+.form-section {
+    margin: 10px;
+}
+
+.error-message {
+    color: red;
+}
+
+
+#noteContent {
+    height: 50px;
+}
+
+input , select {
+    width: 250px;
+    height: 20px;
+    display: block;
+    margin: 10px 0;
+}
+
+option {
+    padding: 20px;
+}

@@ -3,7 +3,8 @@ li {
     text-align: center;
     padding: 10px 10px;
     border: 1px solid black;
-    border-right: 0px;
+    margin: 10px auto;
+    width: 80%;
 }
 
 li:nth-child(even) {

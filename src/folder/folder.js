@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import './folder.css';
 import { NavLink } from 'react-router-dom';
+import NotefulContext from '../notefulContext'
+import PropTypes from 'prop-types';
 
 class Folder extends Component {
+    static contextType = NotefulContext;
     render(){
         return (
-            <NavLink activeClassName="active" exact to={process.env.PUBLIC_URL + `/folder/${this.props.id}`}>
+            <NavLink activeClassName="active" exact to={`/folder/${this.props.id}`}>
                 <li>{this.props.name}</li>
             </NavLink>
         )
@@ -13,3 +16,8 @@ class Folder extends Component {
 }
 
 export default Folder;
+
+Folder.propTypes = {
+    id: PropTypes.string,
+    name: PropTypes.string
+}
