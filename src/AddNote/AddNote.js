@@ -4,19 +4,20 @@ import './AddNote.css'
 import config from '../config'
 
 export default class AddNote extends Component {
+
+    static contextType = NotefulContext;
+
     constructor(props){
         super(props);
         this.state = {
             note: {
                 title: "",
                 content: "",
-                folder: "Super",
+                folder: "Super Important",
                 errorMsg: ""
             }
         }
     }
-
-    static contextType = NotefulContext;
 
     updateTitle(value) {
         this.setState({
@@ -78,10 +79,10 @@ export default class AddNote extends Component {
         }
     }
 
+
     handleSubmitNote(e){
         e.preventDefault();
         this.validateTitle();
-        console.log(this.context.folders)
         if (this.state.note.title.length !== 0){
             console.log('line 1')
             const folder_id = (this.context.folders.find(folder => folder.folder_name === this.state.note.folder)).id
@@ -118,7 +119,9 @@ export default class AddNote extends Component {
     }
 
     render(){
+        console.log(this.context.folders)
         const folderOptions = this.context.folders.map((folder,i) => <option key={i} value={folder.folder_name}>{folder.folder_name}</option>);
+        console.log(this.context.folders)
         return(
             <div className="add-note-container">
                 <h2>Add New Note</h2>
@@ -148,8 +151,10 @@ export default class AddNote extends Component {
                         <label htmlFor='selectFolder'>Save in which folder: </label>
                         <select 
                             id='selectFolder' 
-                            name='selectFolder' 
-                            onChange={(e) => this.updateFolderOption(e.target.value)}>>
+                            name='selectFolder'
+                            onChange={(e) => this.updateFolderOption(e.target.value)}
+                            required>
+                            <option value="">Select</option>
                             {folderOptions}
                         </select>
                     </div>                                            
