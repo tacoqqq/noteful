@@ -8,8 +8,6 @@ class MainSidebar extends Component {
     static contextType = NotefulContext;
     
     render(){
-        console.log('folders')
-        console.log(this.context.folders)
         const folders = this.context.folders.map( folder => 
             <Folder 
                 key={folder.id} 

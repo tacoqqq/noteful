@@ -20,7 +20,6 @@ class Note extends Component{
             }
         })
         .then(data => {
-            console.log(noteId)
             callback(noteId);
         })
         .catch(error => console.error(error))

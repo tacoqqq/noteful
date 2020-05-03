@@ -39,8 +39,6 @@ export default class UpdateNote extends Component {
     }  
 
     updateFolderOption(value) {
-        console.log('in update folder')
-        console.log(value)
         this.setState({
             note: {
                 title: this.state.note.title,
@@ -85,7 +83,6 @@ export default class UpdateNote extends Component {
         this.validateTitle();
         if (this.state.note.title.length !== 0){
             const folder_id = (this.context.folders.find(folder => folder.folder_name === this.state.note.folder)).id
-            console.log(this.state.note.folder)
             const data = {
                 title: this.state.note.title,
                 folder_id: folder_id,
@@ -152,7 +149,6 @@ export default class UpdateNote extends Component {
 
     render(){
         const folderOptions = this.context.folders.map((folder,i) => <option key={i} value={folder.folder_name}>{folder.folder_name}</option>);
-        console.log(this.state.note.folder)
         return(
             <div className="update-note-container">
                 <h2>Update Note</h2>

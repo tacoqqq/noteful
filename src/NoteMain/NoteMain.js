@@ -10,7 +10,6 @@ class NoteMain extends Component {
     static contextType = NotefulContext;
 
     handleDeleteNote = (noteId , callback) => {
-        //console.log('noteId = ' + noteId)
         fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
@@ -23,7 +22,6 @@ class NoteMain extends Component {
             }
         })
         .then(data => {
-            //console.log('innoteid')
             this.props.history.push('/')
             callback(noteId);
         })
@@ -32,7 +30,6 @@ class NoteMain extends Component {
 
     render(){
         const note = this.context.notes.length > 0 ? this.context.notes.find(note => note.id === Number(this.props.match.params.noteId)) : []
-        console.log(this.context)
         return(
                 <>
                     <div className="note">

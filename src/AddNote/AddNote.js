@@ -84,14 +84,12 @@ export default class AddNote extends Component {
         e.preventDefault();
         this.validateTitle();
         if (this.state.note.title.length !== 0){
-            console.log('line 1')
             const folder_id = (this.context.folders.find(folder => folder.folder_name === this.state.note.folder)).id
             const data = {
                 title: this.state.note.title,
                 folder_id: folder_id,
                 content: this.state.note.content
             }
-            console.log(data)
 
             fetch(`${config.API_ENDPOINT}/notes`, {
                 method: 'POST',
@@ -119,9 +117,7 @@ export default class AddNote extends Component {
     }
 
     render(){
-        console.log(this.context.folders)
         const folderOptions = this.context.folders.map((folder,i) => <option key={i} value={folder.folder_name}>{folder.folder_name}</option>);
-        console.log(this.context.folders)
         return(
             <div className="add-note-container">
                 <h2>Add New Note</h2>

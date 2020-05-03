@@ -27,7 +27,6 @@ class App extends Component {
   
   handleDeleteNote = (noteId) => {
     const newNotes = this.state.notes.filter(note => note.id !== noteId);
-    console.log(newNotes);
     this.setState({
       notes: newNotes
     })
@@ -64,8 +63,6 @@ class App extends Component {
   }
 
   componentDidMount(){
-    console.log("ComponentDidMount")
-
     let notesArray = []
     let foldersArray = []
 
@@ -99,39 +96,6 @@ class App extends Component {
           .catch(err => console.error(err))
       })
       .catch(err => console.error(err))
-
-
-/*    
-    fetch(`${config.API_ENDPOINT}/notes`)
-      .then(response=> {
-        if(!response.ok){
-          throw new Error(response.status)
-        }
-        return (response.json())
-      })
-      .then(data => {
-        this.setState({
-          notes: data
-        })
-      })
-      .then(response => {
-        fetch(`${config.API_ENDPOINT}/folders`)
-        .then(response => {
-          if(!response.ok){
-            throw new Error(response.status)
-          }
-          return (response.json())
-        })
-        .then(data => {
-          this.setState({
-            folders: data
-          })
-        })
-        .catch(err => console.error(err))
-      })
-      .catch(err => console.error(err))
-*/
-      console.log('finished componentDidMount')
   }
 
   render(){
