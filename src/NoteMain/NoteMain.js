@@ -41,7 +41,10 @@ class NoteMain extends Component {
                         </Link>
                         <div className="note-second-row">
                             <p>Date modified on {note.created_time}</p>
-                            <button className="delete-button" onClick={() => this.handleDeleteNote(note.id , this.context.deleteNote)}>Delete Note</button>
+                            <div className="button-container">
+                                <button className="update-button"><Link to={`/notes/${note.id}/update`}>Update</Link></button>
+                                <button className="delete-button" onClick={() => this.handleDeleteNote(note.id , this.context.deleteNote)}>Delete</button>
+                            </div>
                         </div>
                     </div>
                     <p className="note-content">{note.content}</p>
