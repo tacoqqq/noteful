@@ -10,14 +10,14 @@ class Main extends Component {
 
     render(){
         const noteList = this.props.match.params.folderId 
-            ? this.context.notes.filter(note => note.folderId === this.props.match.params.folderId) 
+            ? this.context.notes.filter(note => note.folder_id === Number(this.props.match.params.folderId)) 
             : this.context.notes;
         const notes = noteList.map(note => 
             <Note 
                 key={note.id} 
                 id={note.id}
-                title={note.name} 
-                date={note.modified}/>
+                title={note.title} 
+                date={note.created_time}/>
             )
         return (
             <div className="note-list-container">
@@ -29,5 +29,6 @@ class Main extends Component {
         )
     }
 }
+
 
 export default Main;

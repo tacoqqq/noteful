@@ -11,7 +11,9 @@ import NotefulContext from './notefulContext';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import GoBack from './GoBack/GoBack';
+import UpdateNote from './UpdateNote/UpdateNote'
 import Error from './Error';
+import config from './config'
 
 
 class App extends Component {
@@ -45,9 +47,9 @@ class App extends Component {
     })
   }
 
-  componentDidMount(){
-    fetch('http://localhost:9090/folders')
-      .then(response => {
+  handleUpdateNote = () => {
+    fetch(`${config.API_ENDPOINT}/notes`)
+      .then(response=> {
         if(!response.ok){
           throw new Error(response.status)
         }
@@ -55,23 +57,81 @@ class App extends Component {
       })
       .then(data => {
         this.setState({
-          folders: data
+          notes: data
         })
-        fetch('http://localhost:9090/notes')
-          .then(response=> {
+      })
+      .catch(err => console.error(err))
+  }
+
+  componentDidMount(){
+    console.log("ComponentDidMount")
+
+    let notesArray = []
+    let foldersArray = []
+
+    fetch(`${config.API_ENDPOINT}/notes`)
+      .then(response=> {
+        if(!response.ok){
+          throw new Error(response.status)
+        }
+        return (response.json())
+      })
+      .then(data => {
+        notesArray = data
+      })
+      .then(response => {
+        fetch(`${config.API_ENDPOINT}/folders`)
+          .then(response => {
             if(!response.ok){
               throw new Error(response.status)
             }
             return (response.json())
           })
           .then(data => {
+            foldersArray = data
+          })
+          .then(response => {
             this.setState({
-              notes: data
+              folders: foldersArray,
+              notes: notesArray
             })
           })
           .catch(err => console.error(err))
       })
       .catch(err => console.error(err))
+
+
+/*    
+    fetch(`${config.API_ENDPOINT}/notes`)
+      .then(response=> {
+        if(!response.ok){
+          throw new Error(response.status)
+        }
+        return (response.json())
+      })
+      .then(data => {
+        this.setState({
+          notes: data
+        })
+      })
+      .then(response => {
+        fetch(`${config.API_ENDPOINT}/folders`)
+        .then(response => {
+          if(!response.ok){
+            throw new Error(response.status)
+          }
+          return (response.json())
+        })
+        .then(data => {
+          this.setState({
+            folders: data
+          })
+        })
+        .catch(err => console.error(err))
+      })
+      .catch(err => console.error(err))
+*/
+      console.log('finished componentDidMount')
   }
 
   render(){
@@ -82,26 +142,29 @@ class App extends Component {
           notes: this.state.notes,
           deleteNote: this.handleDeleteNote,
           addFolder: this.handleAddFolder,
-          addNote: this.handleAddNote
+          addNote: this.handleAddNote,
+          updateNote: this.handleUpdateNote
         }}>
           <Header />
           <div className='content-section'>
             <nav>
               <Error>
                 <Route exact path='/' component={MainSidebar} />
-                <Route path='/folder/:folderId' component={MainSidebar} />
-                <Route path='/note/:noteId' component={NoteSidebar} />   
+                <Route path='/folders/:folderId' component={MainSidebar} />
+                <Route exact path='/notes/:noteId' component={NoteSidebar} />
                 <Route path='/add-folder' component={GoBack} />     
                 <Route path='/add-note' component={GoBack} />
+                <Route path='/notes/:noteId/update' component={GoBack} />
               </Error>      
             </nav>
             <main>
               <Error>
                 <Route exact path='/' component={Main} />
-                <Route path='/folder/:folderId' component={Main} />
-                <Route path='/note/:noteId' component={NoteMain}/>
+                <Route path='/folders/:folderId' component={Main} />
+                <Route exact path='/notes/:noteId' component={NoteMain}/>
                 <Route path='/add-folder' component={AddFolder} />     
                 <Route path='/add-note' component={AddNote} />  
+                <Route path='/notes/:noteId/update' component={UpdateNote} />  
               </Error>
             </main>
           </div>

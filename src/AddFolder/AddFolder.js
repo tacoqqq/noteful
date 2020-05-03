@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import uuid from 'uuid';
 import NotefulContext from '../notefulContext';
 import config from '../config';
 import './AddFolder.css';
@@ -22,10 +21,8 @@ export default class AddFolder extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const folderId = uuid.v4();
         const folderInfo = {
-            id: folderId,
-            name: event.target.folderName.value
+            folder_name: event.target.folderName.value
         }
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',

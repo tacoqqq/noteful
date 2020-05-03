@@ -7,9 +7,7 @@ import PropTypes from 'prop-types';
 
 class Note extends Component{
     static contextType = NotefulContext;
-
     handleDeleteNote = (noteId , callback) => {
-        console.log(noteId)
         fetch(`${config.API_ENDPOINT}/notes/${noteId}`, {
             method: 'DELETE',
             headers: {
@@ -20,7 +18,6 @@ class Note extends Component{
             if (!response.ok){
                 throw new Error(response.status)
             }
-            return response.json()
         })
         .then(data => {
             console.log(noteId)
@@ -32,12 +29,15 @@ class Note extends Component{
     render(){
         return (
                 <div className="note">
-                    <Link to={`/note/${this.props.id}`}>
+                    <Link to={`/notes/${this.props.id}`}>
                         <h2>{this.props.title}</h2>
                     </Link>
                     <div className="note-second-row">
                         <p>Date modified on {this.props.date}</p>
-                        <button className="delete-button" onClick={() => this.handleDeleteNote(this.props.id , this.context.deleteNote)}>Delete Note</button>
+                        <div className="button-container">
+                            <button className="update-button"><Link to={`/notes/${this.props.id}/update`}>Update</Link></button>
+                            <button className="delete-button" onClick={() => this.handleDeleteNote(this.props.id , this.context.deleteNote)}>Delete</button>
+                        </div>
                     </div>
                 </div>
 
@@ -45,11 +45,13 @@ class Note extends Component{
     }
 }
 
+/*
 Note.propTypes = {
     id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    folder: PropTypes.string.isRequired
+    created_time: PropTypes.string.isRequired,
+    folder_id: PropTypes.string.isRequired
 }
+*/
 
 export default Note;

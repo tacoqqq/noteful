@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import NotefulContext from '../notefulContext';
-import './AddNote.css'
+import './UpdateNote.css'
 import config from '../config'
 
-export default class AddNote extends Component {
+export default class UpdateNote extends Component {
     constructor(props){
         super(props);
         this.state = {
@@ -92,8 +92,8 @@ export default class AddNote extends Component {
             }
             console.log(data)
 
-            fetch(`${config.API_ENDPOINT}/notes`, {
-                method: 'POST',
+            fetch(`${config.API_ENDPOINT}/notes/${this.props.match.params.noteId}`, {
+                method: 'PATCH',
                 body: JSON.stringify(data),
                 headers: {
                     'content-type': 'application/json'
@@ -103,10 +103,9 @@ export default class AddNote extends Component {
                     if(!response.ok) {
                         throw new Error( `Something went wrong. please try again later.`)
                     }
-                    return response.json()
                 })
                 .then(data => {
-                    this.context.addNote(data);
+                    this.context.updateNote();
                     this.props.history.push('/')
                 } )
                 .catch(err => console.error(err))
@@ -117,11 +116,46 @@ export default class AddNote extends Component {
         this.props.history.push('/');
     }
 
+    insertOriginalContent = (content) => {
+        this.setState({
+            note: {
+                title: content.title,
+                content: content.content,
+                folder: this.context.folders.find(folder => folder.id === content.folder_id).folder_name,
+                errorMsg: ""
+            }
+        })
+    }
+
+    componentDidMount(){
+        console.log(`${config.API_ENDPOINT}/notes/${this.props.match.params.noteId}`)
+        fetch(`${config.API_ENDPOINT}/notes/${this.props.match.params.noteId}`)
+            .then(res => {
+                if (!res.ok){
+                    throw new Error(res.status)
+                }
+                return res.json()
+            })
+            .then(note => {
+                this.insertOriginalContent(note)
+            })
+            .catch(error => {
+                this.setState({
+                    note: {
+                        title: "",
+                        content: "",
+                        folder: "Super",
+                        errorMsg: error.message
+                    }
+                })
+            })
+    }
+
     render(){
         const folderOptions = this.context.folders.map((folder,i) => <option key={i} value={folder.folder_name}>{folder.folder_name}</option>);
         return(
-            <div className="add-note-container">
-                <h2>Add New Note</h2>
+            <div className="update-note-container">
+                <h2>Update Note</h2>
                 <form onSubmit={(e) => {this.handleSubmitNote(e)}}>
                     <div className="form-section">
                         <label htmlFor='noteTitle'>Title: </label>
@@ -129,6 +163,7 @@ export default class AddNote extends Component {
                             type="textarea" 
                             id='noteTitle' 
                             name='noteTitle' 
+                            defaultValue={this.state.note.title}
                             onChange={(e) => this.updateTitle(e.target.value)}>
                         </input>
                         <div className="error-message">{this.state.note.errorMsg}</div>
@@ -141,6 +176,7 @@ export default class AddNote extends Component {
                             name='noteContent' 
                             rows="10" 
                             cols="30"
+                            defaultValue={this.state.note.content}
                             onChange={(e) => this.updateContent(e.target.value)}>
                         </input>
                     </div>    
@@ -148,7 +184,8 @@ export default class AddNote extends Component {
                         <label htmlFor='selectFolder'>Save in which folder: </label>
                         <select 
                             id='selectFolder' 
-                            name='selectFolder' 
+                            name='selectFolder'
+                            defaultValue={this.state.note.folder}
                             onChange={(e) => this.updateFolderOption(e.target.value)}>>
                             {folderOptions}
                         </select>

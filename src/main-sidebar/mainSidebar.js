@@ -8,11 +8,13 @@ class MainSidebar extends Component {
     static contextType = NotefulContext;
     
     render(){
+        console.log('folders')
+        console.log(this.context.folders)
         const folders = this.context.folders.map( folder => 
             <Folder 
                 key={folder.id} 
                 id={folder.id}
-                name={folder.name}
+                name={folder.folder_name}
             /> )
         return(
             <aside className="sidebar">
@@ -26,5 +28,6 @@ class MainSidebar extends Component {
         )
     }
 }
+
 
 export default MainSidebar;

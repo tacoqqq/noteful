@@ -8,7 +8,7 @@ class Folder extends Component {
     static contextType = NotefulContext;
     render(){
         return (
-            <NavLink activeClassName="active" exact to={`/folder/${this.props.id}`}>
+            <NavLink activeClassName="active" exact to={`/folders/${this.props.id}`}>
                 <li>{this.props.name}</li>
             </NavLink>
         )
@@ -17,7 +17,9 @@ class Folder extends Component {
 
 export default Folder;
 
+/*
 Folder.propTypes = {
     id: PropTypes.string,
     name: PropTypes.string
 }
+*/
