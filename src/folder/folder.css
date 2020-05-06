@@ -20,3 +20,20 @@ li:last-child {
 .active li {
     background-color: skyblue;
 }
+
+.folder-button-group{
+    margin: auto;
+    padding: 5px;
+    text-align: center;
+}
+
+.folder-button-group button {
+    padding: 10px;
+    width: 80%;
+    margin: auto auto;
+    font-size: 12px;
+}
+
+.folder-button-group button:hover {
+    background-color: orange
+}

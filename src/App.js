@@ -11,7 +11,8 @@ import NotefulContext from './notefulContext';
 import AddFolder from './AddFolder/AddFolder';
 import AddNote from './AddNote/AddNote';
 import GoBack from './GoBack/GoBack';
-import UpdateNote from './UpdateNote/UpdateNote'
+import UpdateNote from './UpdateNote/UpdateNote';
+import UpdateFolder from './UpdateFolder/UpdateFolder';
 import Error from './Error';
 import config from './config'
 
@@ -62,6 +63,22 @@ class App extends Component {
       .catch(err => console.error(err))
   }
 
+  handleDeleteFolder = (folderId) => {
+    const newFolders = this.state.folders.filter(folder => folder.id !== folderId )
+    const newNotes = this.state.notes.filter(note => note.folder_id !== folderId)
+    this.setState({
+      folders: newFolders,
+      notes: newNotes
+    })
+  }
+
+  handleUpdateFolder = (newFolderInfo) => {
+    const newFolders = this.state.folders.map(folder => (folder.id !== Number(newFolderInfo.id)) ? folder : newFolderInfo )
+    this.setState({
+      folders: newFolders
+    })
+  }
+
   componentDidMount(){
     let notesArray = []
     let foldersArray = []
@@ -107,28 +124,32 @@ class App extends Component {
           deleteNote: this.handleDeleteNote,
           addFolder: this.handleAddFolder,
           addNote: this.handleAddNote,
-          updateNote: this.handleUpdateNote
+          updateNote: this.handleUpdateNote,
+          deleteFolder: this.handleDeleteFolder,
+          updateFolder: this.handleUpdateFolder
         }}>
           <Header />
           <div className='content-section'>
             <nav>
               <Error>
                 <Route exact path='/' component={MainSidebar} />
-                <Route path='/folders/:folderId' component={MainSidebar} />
+                <Route exact path='/folders/:folderId' component={MainSidebar} />
                 <Route exact path='/notes/:noteId' component={NoteSidebar} />
                 <Route path='/add-folder' component={GoBack} />     
                 <Route path='/add-note' component={GoBack} />
                 <Route path='/notes/:noteId/update' component={GoBack} />
+                <Route path='/folders/:folderId/update' component={GoBack} />
               </Error>      
             </nav>
             <main>
               <Error>
                 <Route exact path='/' component={Main} />
-                <Route path='/folders/:folderId' component={Main} />
+                <Route exact path='/folders/:folderId' component={Main} />
                 <Route exact path='/notes/:noteId' component={NoteMain}/>
                 <Route path='/add-folder' component={AddFolder} />     
                 <Route path='/add-note' component={AddNote} />  
                 <Route path='/notes/:noteId/update' component={UpdateNote} />  
+                <Route path='/folders/:folderId/update' component={UpdateFolder} />
               </Error>
             </main>
           </div>

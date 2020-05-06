@@ -1,0 +1,14 @@
+.update-folder-form {
+    padding: 10px;
+    margin: 10px;
+}
+
+.button-group {
+    padding: 10px 0;
+}
+
+.button-group button {
+    padding: 5px;
+    margin: 5px;
+    width: 50px;
+}

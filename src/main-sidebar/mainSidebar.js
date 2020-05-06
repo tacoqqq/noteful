@@ -12,6 +12,7 @@ class MainSidebar extends Component {
             <Folder 
                 key={folder.id} 
                 id={folder.id}
+                params={this.props.match.params.folderId ? this.props.match.params.folderId : null}
                 name={folder.folder_name}
             /> )
         return(

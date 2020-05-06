@@ -2,7 +2,7 @@
   "name": "noteful",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://tacoqqq.github.io/noteful",
+  "homepage": ".",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
